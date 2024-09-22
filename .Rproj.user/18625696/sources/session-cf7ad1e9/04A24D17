@@ -1,0 +1,31 @@
+{
+    "id": "04A24D17",
+    "path": "~/Documents/Work/GitHub/PhD/ms_edi_behaviour23/index.qmd",
+    "project_path": "index.qmd",
+    "type": "quarto_markdown",
+    "hash": "1945061348",
+    "contents": "",
+    "dirty": false,
+    "created": 1726994800248.0,
+    "source_on_save": false,
+    "relative_order": 7,
+    "properties": {
+        "rmdVisualMode": "true",
+        "rmdVisualWrapConfigured": "true",
+        "source_window_id": "",
+        "Source": "Source",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "2686:1334",
+        "cursorPosition": "11,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1726994840,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1726994840083,
+    "read_only": false,
+    "read_only_alternatives": []
+}
