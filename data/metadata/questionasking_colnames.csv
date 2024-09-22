@@ -45,6 +45,7 @@ question_type_e,was the question of type e
 question_type_f,was the question of type f
 question_type_g,was the question of type g
 questioner_info,was it a follow up question or anythingn else about the questioner?
+observer_talk,observer number (1-4)
 alternating_hosts,did the hosts alternate roles if there were multiple?
 uncertainty_gender_host,was there any uncertainty in data collection of host gender
 uncertainty_gender_speaker,was there any uncertainty in data collection of speaker gender

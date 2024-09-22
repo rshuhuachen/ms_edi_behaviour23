@@ -3,7 +3,7 @@
 This is the public repository for all the data, code and figures presented in the manuscript titled "How can we make conferences more inclusive? Lessons from the International Ethological Congress" by Rebecca Chen *et al.* (in prep)
 
 To get the repository to your local device, you can use the command (after ensuring git is installed):
-`git clone `
+`git clone https://github.com/rshuhuachen/ms_edi_behaviour23.git`
 and the project can be accessed easily by opening the `.Rproj` file.
 
 You can find a detailed description of the directory below:
@@ -21,7 +21,8 @@ The `question_asking` folder contains all data collected during Q&A sessions on 
 
 ## Scripts
 
-You will find all main scripts used for analysis in quarto-format (similar to RMarkdown), which can be found in the sub-directory `./qmd` or on the html page here: 
+You will find all main scripts used for analysis in quarto-format (similar to RMarkdown), which can be found in the sub-directory `./qmd` or on the html page here: https://rshuhuachen.github.io/ms_edi_behaviour23/
+
 All additional scripts used for creating additional figures can be found in the `scripts` directory, as well as the IOR analysis. 
 
 All html files are found in `./docs` and results of the analysis are saved as tables in `./results`.

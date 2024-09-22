@@ -173,7 +173,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../qmd/1_summary_identities.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Abstract submission, registration and awardees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Abstract submission and registration</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -278,7 +278,7 @@ div.csl-indent {
 <p>First, we explored the potential for age-related effects to bias our interpretation of gender disparity in question asking by calculating the proportion of senior women who attended the congress, based on collected data on career stage and pronouns during registration. We defined a female senior scientist as someone who uses she/her pronouns and has a “Professor” or “Associate Professor” title, as a male senior scientist as someone who uses he/him pronouns and has a “Professor” or “Associate Professor” title.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># registration</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>all_reg <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">"../data/metadata/Registration_clean.tsv"</span>, <span class="at">quote=</span><span class="st">""</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>all_reg <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">"../data/pre_survey/Registration_clean.tsv"</span>, <span class="at">quote=</span><span class="st">""</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># exclude gender queer and no answer because this gets too complex and </span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sample size is low</span></span>
@@ -287,10 +287,14 @@ div.csl-indent {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># look at career stage data across the entire congress</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as.factor</span>(all_reg<span class="sc">$</span>Career))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>               Post doctorate or almost                  Professor or associate 
-                                    157                                      87 
-Senior position, lecturers, researchers                Students (BSc, MSc, PhD) 
-                                    103                                     337 </code></pre>
+<pre><code>"Senior position, lecturers, researchers" 
+                                      103 
+               "Students (BSc, MSc, PhD)" 
+                                      337 
+                 Post doctorate or almost 
+                                      157 
+                   Professor or associate 
+                                       87 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we assessed age categories in practise by dividing age into three classes: </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt; 35, 35-50 and &gt;50. </span></span>
