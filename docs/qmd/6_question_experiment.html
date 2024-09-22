@@ -259,11 +259,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 230</code></pre>
-</div>
-</div>
 <p>We conducted an experiment in which we instructed session hosts assigned to manipulated sessions to either direct the first question of the Q&amp;A to a woman or to a man. Here, we test whether this condition (first question asked by a man vs a woman) significantly affects the probability that women asks questions in the rest of the Q&amp;A, the probability of a woman raising their hand, and/or the probability of a woman getting chosen to ask their question. Our hypothesis is that if women engagement is encouraged by female participation, women ask more questions in the condition where women started the Q&amp;A.</p>
 <p>To address this question, we build binomial GLMMs with condition as a fixed effect. The model structure is similar to the question-asking models used in section XXXX.</p>
 <section id="manipulated-data" class="level2" data-number="7.1">
@@ -271,14 +266,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>First, we focus on manipulated sessions only, where we exclude situations where the host could not make a choice or if the gender proportion in the audience or the gender of the questioner was unknown (or disagreed upon between observers).</p>
 <p>We assess the significance of the condition using an LRT as well as a Wald test.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Asking questions</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>man_ask_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>man_ask <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># LRT</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(<span class="at">test=</span><span class="st">"Chisq"</span>,man_ask) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Asking questions</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>man_ask_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>man_ask <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># LRT</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(<span class="at">test=</span><span class="st">"Chisq"</span>,man_ask) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Single term deletions
 
@@ -288,7 +283,7 @@ gender_questioner_female ~ -1 + condition + (1 | session_id/talk_id)
 &lt;none&gt;         294.73               
 condition    1 294.87 2.1355  0.1439</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_ask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_ask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -323,10 +318,10 @@ conditionM 0.000
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_ask <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_ask, <span class="at">null =</span> man_ask_null,  <span class="at">name =</span> <span class="st">"QA_mani_asking"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_ask <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_ask <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_ask, <span class="at">null =</span> man_ask_null,  <span class="at">name =</span> <span class="st">"QA_mani_asking"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_ask <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -407,17 +402,17 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 
 
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Raising hands</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove when no hands when were raised, only men or only women</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>data_analysis_tr_hands <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_tr, hands_total <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(hands_women) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(hands_men) <span class="sc">&amp;</span> </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">is.na</span>(hands_total))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>man_hands_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span>  (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>man_hands <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_hands)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Raising hands</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove when no hands when were raised, only men or only women</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>data_analysis_tr_hands <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_tr, hands_total <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(hands_women) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(hands_men) <span class="sc">&amp;</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">is.na</span>(hands_total))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>man_hands_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span>  (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>man_hands <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_hands)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -451,10 +446,10 @@ Correlation of Fixed Effects:
            cndtnF
 conditionM 0.000 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_hands <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_hands, <span class="at">null =</span> man_hands_null,  <span class="at">name =</span> <span class="st">"QA_mani_hands"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_hands <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_hands <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_hands, <span class="at">null =</span> man_hands_null,  <span class="at">name =</span> <span class="st">"QA_mani_hands"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_hands <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -535,20 +530,20 @@ conditionM 0.000 </code></pre>
 
 
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Getting chosen</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># exclude cases where the host could not choose</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>data_analysis_tr_chosen <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_tr, hands_prop_women <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> hands_prop_women <span class="sc">&lt;</span> <span class="dv">1</span>) </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(data_analysis_tr_chosen) <span class="co">#49</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Getting chosen</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># exclude cases where the host could not choose</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>data_analysis_tr_chosen <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_tr, hands_prop_women <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> hands_prop_women <span class="sc">&lt;</span> <span class="dv">1</span>) </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(data_analysis_tr_chosen) <span class="co">#49</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 49</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>man_chosen_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_tr_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>man_chosen <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_tr_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_chosen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>man_chosen_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_tr_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>man_chosen <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_tr_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_chosen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -581,10 +576,10 @@ conditionM 0.000
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_chosen <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_chosen, <span class="at">null =</span> man_chosen_null,  <span class="at">name =</span> <span class="st">"QA_mani_chosen"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_chosen <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_chosen <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_chosen, <span class="at">null =</span> man_chosen_null,  <span class="at">name =</span> <span class="st">"QA_mani_chosen"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_chosen <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -670,20 +665,20 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="manipulated-data-only-second-question"><span class="header-section-number">7.1.1</span> Manipulated data only second question</h3>
 <p>Additionally, we address the same three questions as above but only focus on the probability that a woman asks <em>the second</em> question as opposed to the entire rest of the Q&amp;A.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select only the second question</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>data_analysis_tr2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_tr, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>data_analysis_tr2_hands <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_tr_hands, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>data_analysis_tr2_chosen <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_tr_chosen, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">### Asking questions</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>man_ask_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span>  <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr2, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>man_ask_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr2, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_ask_q2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select only the second question</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>data_analysis_tr2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_tr, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>data_analysis_tr2_hands <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_tr_hands, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>data_analysis_tr2_chosen <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_tr_chosen, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">### Asking questions</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>man_ask_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span>  <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr2, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>man_ask_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr2, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_ask_q2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -716,10 +711,10 @@ Correlation of Fixed Effects:
            cndtnF
 conditionM -0.041</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_ask_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_ask_q2, <span class="at">null =</span> man_ask_q2_null,  <span class="at">name =</span> <span class="st">"QA_mani_asking_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_ask_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>() <span class="co">#same conclusion as above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_ask_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_ask_q2, <span class="at">null =</span> man_ask_q2_null,  <span class="at">name =</span> <span class="st">"QA_mani_asking_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_ask_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>() <span class="co">#same conclusion as above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -800,13 +795,13 @@ conditionM -0.041</code></pre>
 
 
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Raising hands</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>man_hands_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr2_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>man_hands_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr2_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_hands_q2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Raising hands</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>man_hands_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr2_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>man_hands_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_tr2_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_hands_q2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -842,10 +837,10 @@ conditionM -0.044
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_hands_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_hands_q2, <span class="at">null =</span> man_hands_q2_null,  <span class="at">name =</span> <span class="st">"QA_mani_hands_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_hands_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>() <span class="co">#same conclusion as above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_hands_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_hands_q2, <span class="at">null =</span> man_hands_q2_null,  <span class="at">name =</span> <span class="st">"QA_mani_hands_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_hands_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>() <span class="co">#same conclusion as above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -926,17 +921,17 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 
 
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Raising hands</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(data_analysis_tr2_chosen) <span class="co">#20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Raising hands</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(data_analysis_tr2_chosen) <span class="co">#20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 20</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>man_chosen_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_tr2_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>man_chosen_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_tr2_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_chosen_q2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>man_chosen_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_tr2_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>man_chosen_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_tr2_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(man_chosen_q2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -969,10 +964,10 @@ conditionM 0.003
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_chosen_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_chosen_q2, <span class="at">null =</span> man_chosen_q2_null,  <span class="at">name =</span> <span class="st">"QA_mani_chosen_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_chosen_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>m_qa_man_chosen_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> man_chosen_q2, <span class="at">null =</span> man_chosen_q2_null,  <span class="at">name =</span> <span class="st">"QA_mani_chosen_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>m_qa_man_chosen_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -1060,14 +1055,14 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <h2 data-number="7.2" class="anchored" data-anchor-id="unmanipulated-data"><span class="header-section-number">7.2</span> Unmanipulated data</h2>
 <p>We ask the same question but using the unmanipulated data only, where session hosts were not given any instructions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Asking questions</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>unman_ask_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>unman_ask <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># LRT</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(<span class="at">test=</span><span class="st">"Chisq"</span>,unman_ask) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Asking questions</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>unman_ask_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>unman_ask <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># LRT</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(<span class="at">test=</span><span class="st">"Chisq"</span>,unman_ask) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Single term deletions
 
@@ -1080,7 +1075,7 @@ FIRST_questioner_gender    1 292.47 6.3415 0.01179 *
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_ask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_ask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -1116,10 +1111,10 @@ FIRST_qst_M 0.000
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_ask <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_ask, <span class="at">null =</span> unman_ask_null,  <span class="at">name =</span> <span class="st">"QA_unmani_asking"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_ask <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_ask <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_ask, <span class="at">null =</span> unman_ask_null,  <span class="at">name =</span> <span class="st">"QA_unmani_asking"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_ask <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -1200,17 +1195,17 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 
 
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Raising hands</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove when no hands when were raised, only men or only women</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>data_analysis_c_hands <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_c, hands_total <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(hands_women) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(hands_men) <span class="sc">&amp;</span> </span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">is.na</span>(hands_total))</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>unman_hands_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span>  (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>unman_hands <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_hands)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Raising hands</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove when no hands when were raised, only men or only women</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>data_analysis_c_hands <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_c, hands_total <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(hands_women) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(hands_men) <span class="sc">&amp;</span> </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">is.na</span>(hands_total))</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>unman_hands_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span>  (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>unman_hands <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_hands)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -1244,10 +1239,10 @@ Correlation of Fixed Effects:
             FIRST__F
 FIRST_qst_M 0.163   </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_hands <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_hands, <span class="at">null =</span> unman_hands_null,  <span class="at">name =</span> <span class="st">"QA_unmani_hands"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_hands <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_hands <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_hands, <span class="at">null =</span> unman_hands_null,  <span class="at">name =</span> <span class="st">"QA_unmani_hands"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_hands <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -1328,20 +1323,20 @@ FIRST_qst_M 0.163   </code></pre>
 
 
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Getting chosen</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># exclude cases where the host could not choose</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>data_analysis_c_chosen <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_c, hands_prop_women <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> hands_prop_women <span class="sc">&lt;</span> <span class="dv">1</span>) </span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(data_analysis_c_chosen) <span class="co">#51</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Getting chosen</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># exclude cases where the host could not choose</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>data_analysis_c_chosen <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_c, hands_prop_women <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> hands_prop_women <span class="sc">&lt;</span> <span class="dv">1</span>) </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(data_analysis_c_chosen) <span class="co">#51</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 51</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>unman_chosen_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_c_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>unman_chosen <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_c_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_chosen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>unman_chosen_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_c_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>unman_chosen <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_c_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_chosen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -1375,10 +1370,10 @@ FIRST_qst_M 0.000
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_chosen <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_chosen, <span class="at">null =</span> unman_chosen_null,  <span class="at">name =</span> <span class="st">"QA_unmani_chosen"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_chosen <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_chosen <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_chosen, <span class="at">null =</span> unman_chosen_null,  <span class="at">name =</span> <span class="st">"QA_unmani_chosen"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_chosen <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -1464,20 +1459,20 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <h3 data-number="7.2.1" class="anchored" data-anchor-id="unmanipulated-data-only-second-question"><span class="header-section-number">7.2.1</span> Unmanipulated data only second question</h3>
 <p>Additionally, we address the same three questions as above but only focus on the probability that a woman asks <em>the second</em> question as opposed to the entire rest of the Q&amp;A.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select only the second question</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>data_analysis_c2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_c, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>data_analysis_c2_hands <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_c_hands, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>data_analysis_c2_chosen <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_c_chosen, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="do">### Asking questions</span></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>unman_ask_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span>  <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c2, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>unman_ask_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c2, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_ask_q2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select only the second question</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>data_analysis_c2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_c, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>data_analysis_c2_hands <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_c_hands, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>data_analysis_c2_chosen <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_analysis_c_chosen, question_nr <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="do">### Asking questions</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>unman_ask_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span>  <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c2, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>unman_ask_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c2, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_ask_q2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -1513,10 +1508,10 @@ FIRST_qst_M -0.056
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_ask_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_ask_q2, <span class="at">null =</span> unman_ask_q2_null,  <span class="at">name =</span> <span class="st">"QA_unmani_asking_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_ask_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>() <span class="co">#same conclusion as above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_ask_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_ask_q2, <span class="at">null =</span> unman_ask_q2_null,  <span class="at">name =</span> <span class="st">"QA_unmani_asking_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_ask_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>() <span class="co">#same conclusion as above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -1597,13 +1592,13 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 
 
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Raising hands</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>unman_hands_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c2_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>unman_hands_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c2_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_hands_q2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Raising hands</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>unman_hands_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c2_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>unman_hands_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(<span class="fu">cbind</span>(hands_women, hands_men) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">data =</span> data_analysis_c2_hands, <span class="at">family =</span> binomial, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop))</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_hands_q2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -1639,10 +1634,10 @@ FIRST_qst_M 0.024
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_hands_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_hands_q2, <span class="at">null =</span> unman_hands_q2_null,  <span class="at">name =</span> <span class="st">"QA_unmani_hands_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_hands_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>() <span class="co">#same conclusion as above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_hands_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_hands_q2, <span class="at">null =</span> unman_hands_q2_null,  <span class="at">name =</span> <span class="st">"QA_unmani_hands_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_hands_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>() <span class="co">#same conclusion as above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -1723,17 +1718,17 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 
 
 </div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Raising hands</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(data_analysis_c2_chosen) <span class="co">#26</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Raising hands</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(data_analysis_c2_chosen) <span class="co">#26</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 26</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>unman_chosen_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_c2_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>unman_chosen_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_c2_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_chosen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>unman_chosen_q2_null <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_c2_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>unman_chosen_q2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> FIRST_questioner_gender <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), data_analysis_c2_chosen, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset =</span> boot<span class="sc">::</span><span class="fu">logit</span>(hands_prop_women))</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(unman_chosen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -1767,10 +1762,10 @@ FIRST_qst_M 0.000
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_chosen_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_chosen_q2, <span class="at">null =</span> unman_chosen_q2_null,  <span class="at">name =</span> <span class="st">"QA_unmani_chosen_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_chosen_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>m_qa_unman_chosen_q2 <span class="ot">&lt;-</span> <span class="fu">collect_out</span>(<span class="at">model =</span> unman_chosen_q2, <span class="at">null =</span> unman_chosen_q2_null,  <span class="at">name =</span> <span class="st">"QA_unmani_chosen_Q2"</span>, <span class="at">n_factors =</span> <span class="dv">2</span>, <span class="at">type =</span> <span class="st">"exp"</span>, <span class="at">save=</span><span class="st">"yes"</span>, <span class="at">dir=</span><span class="st">"../results/question-asking/"</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>m_qa_unman_chosen_q2 <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic_2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
@@ -1858,90 +1853,90 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 <h2 data-number="7.3" class="anchored" data-anchor-id="plots"><span class="header-section-number">7.3</span> Plots</h2>
 <p>Let’s try to play around with ways of showing the raw data of the effect of the gender of the first questioner on the probability that a woman asks a question in the rest of the session.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>prop_plot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">what =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Asking questions"</span>, <span class="st">"Raising hands"</span>, <span class="st">"Getting chosen"</span>), <span class="at">times=</span><span class="dv">4</span>),</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Manipulated"</span>, <span class="st">"Unmanipulated"</span>), <span class="at">each =</span> <span class="dv">6</span>),</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">gender_first =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Woman"</span>), <span class="at">times=</span><span class="dv">3</span>), <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Man"</span>), <span class="at">times=</span><span class="dv">3</span>)), <span class="at">times=</span><span class="dv">2</span>),</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">est =</span> <span class="fu">c</span>(m_qa_man_ask<span class="sc">$</span>est_conditionF,</span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>est_conditionF,</span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>est_conditionF,</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_ask<span class="sc">$</span>est_conditionM,</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>est_conditionM,</span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>est_conditionM,</span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>est_FIRST_questioner_genderF,</span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>est_FIRST_questioner_genderF,</span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>est_FIRST_questioner_genderF,</span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>est_FIRST_questioner_genderM,</span>
-<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>est_FIRST_questioner_genderM,</span>
-<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>est_FIRST_questioner_genderM),</span>
-<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>                        <span class="at">lower =</span> <span class="fu">c</span>(m_qa_man_ask<span class="sc">$</span>lowerCI_conditionF,</span>
-<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>lowerCI_conditionF,</span>
-<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>lowerCI_conditionF,</span>
-<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_ask<span class="sc">$</span>lowerCI_conditionM,</span>
-<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>lowerCI_conditionM,</span>
-<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>lowerCI_conditionM,</span>
-<span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a>                                m_qa_unman_ask<span class="sc">$</span>lowerCI_FIRST_questioner_genderF,</span>
-<span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>lowerCI_FIRST_questioner_genderF,</span>
-<span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>lowerCI_FIRST_questioner_genderF,</span>
-<span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>lowerCI_FIRST_questioner_genderM,</span>
-<span id="cb50-26"><a href="#cb50-26" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>lowerCI_FIRST_questioner_genderM,</span>
-<span id="cb50-27"><a href="#cb50-27" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>lowerCI_FIRST_questioner_genderM),</span>
-<span id="cb50-28"><a href="#cb50-28" aria-hidden="true" tabindex="-1"></a>                        <span class="at">higher =</span> <span class="fu">c</span>(m_qa_man_ask<span class="sc">$</span>higherCI_conditionF,</span>
-<span id="cb50-29"><a href="#cb50-29" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>higherCI_conditionF,</span>
-<span id="cb50-30"><a href="#cb50-30" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>higherCI_conditionF,</span>
-<span id="cb50-31"><a href="#cb50-31" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_ask<span class="sc">$</span>higherCI_conditionM,</span>
-<span id="cb50-32"><a href="#cb50-32" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>higherCI_conditionM,</span>
-<span id="cb50-33"><a href="#cb50-33" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>higherCI_conditionM,</span>
-<span id="cb50-34"><a href="#cb50-34" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>higherCI_FIRST_questioner_genderF,</span>
-<span id="cb50-35"><a href="#cb50-35" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>higherCI_FIRST_questioner_genderF,</span>
-<span id="cb50-36"><a href="#cb50-36" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>higherCI_FIRST_questioner_genderF,</span>
-<span id="cb50-37"><a href="#cb50-37" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>higherCI_FIRST_questioner_genderM,</span>
-<span id="cb50-38"><a href="#cb50-38" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>higherCI_FIRST_questioner_genderM,</span>
-<span id="cb50-39"><a href="#cb50-39" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>higherCI_FIRST_questioner_genderM),</span>
-<span id="cb50-40"><a href="#cb50-40" aria-hidden="true" tabindex="-1"></a>                         <span class="at">pval =</span> <span class="fu">c</span>(m_qa_man_ask<span class="sc">$</span>pval_conditionF,</span>
-<span id="cb50-41"><a href="#cb50-41" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>pval_conditionF,</span>
-<span id="cb50-42"><a href="#cb50-42" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>pval_conditionF,</span>
-<span id="cb50-43"><a href="#cb50-43" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_ask<span class="sc">$</span>pval_conditionM,</span>
-<span id="cb50-44"><a href="#cb50-44" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>pval_conditionM,</span>
-<span id="cb50-45"><a href="#cb50-45" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>pval_conditionM,</span>
-<span id="cb50-46"><a href="#cb50-46" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>pval_FIRST_questioner_genderF,</span>
-<span id="cb50-47"><a href="#cb50-47" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>pval_FIRST_questioner_genderF,</span>
-<span id="cb50-48"><a href="#cb50-48" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>pval_FIRST_questioner_genderF,</span>
-<span id="cb50-49"><a href="#cb50-49" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>pval_FIRST_questioner_genderM,</span>
-<span id="cb50-50"><a href="#cb50-50" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>pval_FIRST_questioner_genderM,</span>
-<span id="cb50-51"><a href="#cb50-51" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>pval_FIRST_questioner_genderM))</span>
-<span id="cb50-52"><a href="#cb50-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-53"><a href="#cb50-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-54"><a href="#cb50-54" aria-hidden="true" tabindex="-1"></a>col_sig <span class="ot">&lt;-</span> clrs[<span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">2</span>)] <span class="sc">%&gt;%</span></span>
-<span id="cb50-55"><a href="#cb50-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">color</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb50-56"><a href="#cb50-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="at">nm =</span> <span class="fu">c</span>(<span class="st">"sig"</span>, <span class="st">"nonsig"</span>))</span>
-<span id="cb50-57"><a href="#cb50-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-58"><a href="#cb50-58" aria-hidden="true" tabindex="-1"></a>prop_plot <span class="ot">&lt;-</span> prop_plot <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">est_prob =</span> <span class="fu">plogis</span>(est),</span>
-<span id="cb50-59"><a href="#cb50-59" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">lower_prob =</span> <span class="fu">plogis</span>(lower),</span>
-<span id="cb50-60"><a href="#cb50-60" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">higher_prob =</span> <span class="fu">plogis</span>(higher),</span>
-<span id="cb50-61"><a href="#cb50-61" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">sig =</span> <span class="fu">case_when</span>(pval <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">"sig"</span>, pval <span class="sc">&gt;=</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">"nonsig"</span>))</span>
-<span id="cb50-62"><a href="#cb50-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-63"><a href="#cb50-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-64"><a href="#cb50-64" aria-hidden="true" tabindex="-1"></a>prop_plot<span class="sc">$</span>what <span class="ot">&lt;-</span> <span class="fu">factor</span>(prop_plot<span class="sc">$</span>what, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Asking questions"</span>, <span class="st">"Raising hands"</span>, <span class="st">"Getting chosen"</span>))</span>
-<span id="cb50-65"><a href="#cb50-65" aria-hidden="true" tabindex="-1"></a>prop_plot<span class="sc">$</span>data <span class="ot">&lt;-</span> <span class="fu">factor</span>(prop_plot<span class="sc">$</span>data, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Unmanipulated"</span>, <span class="st">"Manipulated"</span>))</span>
-<span id="cb50-66"><a href="#cb50-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-67"><a href="#cb50-67" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(prop_plot) <span class="sc">+</span></span>
-<span id="cb50-68"><a href="#cb50-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> est_prob, <span class="at">x =</span> gender_first, <span class="at">col =</span> sig), <span class="at">size =</span> <span class="dv">6</span>) <span class="sc">+</span> </span>
-<span id="cb50-69"><a href="#cb50-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">y =</span> lower_prob, <span class="at">yend =</span> higher_prob, <span class="at">x =</span> gender_first),</span>
-<span id="cb50-70"><a href="#cb50-70" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb50-71"><a href="#cb50-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
-<span id="cb50-72"><a href="#cb50-72" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb50-73"><a href="#cb50-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Female probability and 95% CI"</span>, <span class="at">x =</span> <span class="st">"Gender first questioner"</span>) <span class="sc">+</span> </span>
-<span id="cb50-74"><a href="#cb50-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(data<span class="sc">~</span>what, <span class="at">scales=</span><span class="st">"free_x"</span>)<span class="sc">+</span></span>
-<span id="cb50-75"><a href="#cb50-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> col_sig) <span class="sc">+</span></span>
-<span id="cb50-76"><a href="#cb50-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb50-77"><a href="#cb50-77" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>),</span>
-<span id="cb50-78"><a href="#cb50-78" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">size =</span> <span class="dv">1</span>)) <span class="ot">-&gt;</span> plot_exp</span>
-<span id="cb50-79"><a href="#cb50-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-80"><a href="#cb50-80" aria-hidden="true" tabindex="-1"></a>plot_exp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>prop_plot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">what =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Asking questions"</span>, <span class="st">"Raising hands"</span>, <span class="st">"Getting chosen"</span>), <span class="at">times=</span><span class="dv">4</span>),</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Manipulated"</span>, <span class="st">"Unmanipulated"</span>), <span class="at">each =</span> <span class="dv">6</span>),</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">gender_first =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Woman"</span>), <span class="at">times=</span><span class="dv">3</span>), <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Man"</span>), <span class="at">times=</span><span class="dv">3</span>)), <span class="at">times=</span><span class="dv">2</span>),</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">est =</span> <span class="fu">c</span>(m_qa_man_ask<span class="sc">$</span>est_conditionF,</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>est_conditionF,</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>est_conditionF,</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_ask<span class="sc">$</span>est_conditionM,</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>est_conditionM,</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>est_conditionM,</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>est_FIRST_questioner_genderF,</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>est_FIRST_questioner_genderF,</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>est_FIRST_questioner_genderF,</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>est_FIRST_questioner_genderM,</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>est_FIRST_questioner_genderM,</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>est_FIRST_questioner_genderM),</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>                        <span class="at">lower =</span> <span class="fu">c</span>(m_qa_man_ask<span class="sc">$</span>lowerCI_conditionF,</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>lowerCI_conditionF,</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>lowerCI_conditionF,</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_ask<span class="sc">$</span>lowerCI_conditionM,</span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>lowerCI_conditionM,</span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>lowerCI_conditionM,</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>                                m_qa_unman_ask<span class="sc">$</span>lowerCI_FIRST_questioner_genderF,</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>lowerCI_FIRST_questioner_genderF,</span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>lowerCI_FIRST_questioner_genderF,</span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>lowerCI_FIRST_questioner_genderM,</span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>lowerCI_FIRST_questioner_genderM,</span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>lowerCI_FIRST_questioner_genderM),</span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>                        <span class="at">higher =</span> <span class="fu">c</span>(m_qa_man_ask<span class="sc">$</span>higherCI_conditionF,</span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>higherCI_conditionF,</span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>higherCI_conditionF,</span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_ask<span class="sc">$</span>higherCI_conditionM,</span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>higherCI_conditionM,</span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>higherCI_conditionM,</span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>higherCI_FIRST_questioner_genderF,</span>
+<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>higherCI_FIRST_questioner_genderF,</span>
+<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>higherCI_FIRST_questioner_genderF,</span>
+<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>higherCI_FIRST_questioner_genderM,</span>
+<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>higherCI_FIRST_questioner_genderM,</span>
+<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>higherCI_FIRST_questioner_genderM),</span>
+<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a>                         <span class="at">pval =</span> <span class="fu">c</span>(m_qa_man_ask<span class="sc">$</span>pval_conditionF,</span>
+<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>pval_conditionF,</span>
+<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>pval_conditionF,</span>
+<span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_ask<span class="sc">$</span>pval_conditionM,</span>
+<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_hands<span class="sc">$</span>pval_conditionM,</span>
+<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a>                                     m_qa_man_chosen<span class="sc">$</span>pval_conditionM,</span>
+<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>pval_FIRST_questioner_genderF,</span>
+<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>pval_FIRST_questioner_genderF,</span>
+<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>pval_FIRST_questioner_genderF,</span>
+<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_ask<span class="sc">$</span>pval_FIRST_questioner_genderM,</span>
+<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_hands<span class="sc">$</span>pval_FIRST_questioner_genderM,</span>
+<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a>                                     m_qa_unman_chosen<span class="sc">$</span>pval_FIRST_questioner_genderM))</span>
+<span id="cb49-52"><a href="#cb49-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-53"><a href="#cb49-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-54"><a href="#cb49-54" aria-hidden="true" tabindex="-1"></a>col_sig <span class="ot">&lt;-</span> clrs[<span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">2</span>)] <span class="sc">%&gt;%</span></span>
+<span id="cb49-55"><a href="#cb49-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">color</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb49-56"><a href="#cb49-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="at">nm =</span> <span class="fu">c</span>(<span class="st">"sig"</span>, <span class="st">"nonsig"</span>))</span>
+<span id="cb49-57"><a href="#cb49-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-58"><a href="#cb49-58" aria-hidden="true" tabindex="-1"></a>prop_plot <span class="ot">&lt;-</span> prop_plot <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">est_prob =</span> <span class="fu">plogis</span>(est),</span>
+<span id="cb49-59"><a href="#cb49-59" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">lower_prob =</span> <span class="fu">plogis</span>(lower),</span>
+<span id="cb49-60"><a href="#cb49-60" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">higher_prob =</span> <span class="fu">plogis</span>(higher),</span>
+<span id="cb49-61"><a href="#cb49-61" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">sig =</span> <span class="fu">case_when</span>(pval <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">"sig"</span>, pval <span class="sc">&gt;=</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">"nonsig"</span>))</span>
+<span id="cb49-62"><a href="#cb49-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-63"><a href="#cb49-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-64"><a href="#cb49-64" aria-hidden="true" tabindex="-1"></a>prop_plot<span class="sc">$</span>what <span class="ot">&lt;-</span> <span class="fu">factor</span>(prop_plot<span class="sc">$</span>what, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Asking questions"</span>, <span class="st">"Raising hands"</span>, <span class="st">"Getting chosen"</span>))</span>
+<span id="cb49-65"><a href="#cb49-65" aria-hidden="true" tabindex="-1"></a>prop_plot<span class="sc">$</span>data <span class="ot">&lt;-</span> <span class="fu">factor</span>(prop_plot<span class="sc">$</span>data, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Unmanipulated"</span>, <span class="st">"Manipulated"</span>))</span>
+<span id="cb49-66"><a href="#cb49-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-67"><a href="#cb49-67" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(prop_plot) <span class="sc">+</span></span>
+<span id="cb49-68"><a href="#cb49-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> est_prob, <span class="at">x =</span> gender_first, <span class="at">col =</span> sig), <span class="at">size =</span> <span class="dv">6</span>) <span class="sc">+</span> </span>
+<span id="cb49-69"><a href="#cb49-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">y =</span> lower_prob, <span class="at">yend =</span> higher_prob, <span class="at">x =</span> gender_first),</span>
+<span id="cb49-70"><a href="#cb49-70" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb49-71"><a href="#cb49-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb49-72"><a href="#cb49-72" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-73"><a href="#cb49-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Female probability and 95% CI"</span>, <span class="at">x =</span> <span class="st">"Gender first questioner"</span>) <span class="sc">+</span> </span>
+<span id="cb49-74"><a href="#cb49-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(data<span class="sc">~</span>what, <span class="at">scales=</span><span class="st">"free_x"</span>)<span class="sc">+</span></span>
+<span id="cb49-75"><a href="#cb49-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> col_sig) <span class="sc">+</span></span>
+<span id="cb49-76"><a href="#cb49-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb49-77"><a href="#cb49-77" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>),</span>
+<span id="cb49-78"><a href="#cb49-78" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">size =</span> <span class="dv">1</span>)) <span class="ot">-&gt;</span> plot_exp</span>
+<span id="cb49-79"><a href="#cb49-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-80"><a href="#cb49-80" aria-hidden="true" tabindex="-1"></a>plot_exp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="6_question_experiment_files/figure-html/plots-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(plot_exp, <span class="at">file =</span> <span class="st">"../plots/main/fig4_qa_exp.png"</span>, <span class="at">width=</span><span class="dv">10</span>, <span class="at">height=</span><span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(plot_exp, <span class="at">file =</span> <span class="st">"../plots/main/fig4_qa_exp.png"</span>, <span class="at">width=</span><span class="dv">10</span>, <span class="at">height=</span><span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

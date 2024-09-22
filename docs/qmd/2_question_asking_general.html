@@ -224,6 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sec-mainmodel" id="toc-sec-mainmodel" class="nav-link active" data-scroll-target="#sec-mainmodel"><span class="header-section-number">3.1</span> Observational data</a>
   <ul class="collapse">
   <li><a href="#preparing-data-and-validation-of-potential-covariates" id="toc-preparing-data-and-validation-of-potential-covariates" class="nav-link" data-scroll-target="#preparing-data-and-validation-of-potential-covariates"><span class="header-section-number">3.1.1</span> Preparing data and validation of potential covariates</a></li>
+  <li><a href="#build-model" id="toc-build-model" class="nav-link" data-scroll-target="#build-model"><span class="header-section-number">3.1.2</span> Build model</a></li>
   </ul></li>
   <li><a href="#plenary-sessions" id="toc-plenary-sessions" class="nav-link" data-scroll-target="#plenary-sessions"><span class="header-section-number">3.2</span> Plenary sessions</a></li>
   <li><a href="#self-reports" id="toc-self-reports" class="nav-link" data-scroll-target="#self-reports"><span class="header-section-number">3.3</span> Self-reports</a></li>
@@ -645,6 +646,9 @@ optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
 </div>
+</section>
+<section id="build-model" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="build-model"><span class="header-section-number">3.1.2</span> Build model</h3>
 <p>Nothing is significant, so let’s build the model</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m_qa_general <span class="ot">&lt;-</span> <span class="fu">glmer</span>(gender_questioner_female <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>session_id<span class="sc">/</span>talk_id), <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">offset=</span>boot<span class="sc">::</span><span class="fu">logit</span>(audience_women_prop), <span class="at">data =</span> data_control)</span>
