@@ -1,0 +1,94 @@
+names(survey),full question
+id,entry ID
+gender,Which gender identity do you mostly identify to? 
+pronoun,What are your preferred pronouns? 
+nationality,What is your nationality?
+affiliation,What is the country of your affiliation?
+career,What is your career stage? 
+career_other,What is your career stage? Free text response to 'other'
+lgbtq,Do you identify as LGBTQIA+? 
+age,Which age category do you belong to? 
+attend_congress,Did you attend the congress? 
+read_inclusivity,"Did you read our inclusivity and accessibility page before making your decision to attend the Congress? (this page included information about childcare, special needs, safe-space measures and the Code of Conduct) "
+inclusivity_decision,Did our inclusivity and accessibility page play a role in your decision to attend the congress? 
+convene_symposium,Did you convene a symposium? 
+rejected_invitations,Did you invite any researchers to speak in your symposium who rejected the invitation? 
+rejected_invitations_info,Did you invite any researchers to speak in your symposium who rejected the invitation?  Free text response
+reason_nonattend_time,Why did you not participate? I had other commitments during the timeframe of the congress
+reason_nonattend_funding,Why did you not participate? My university/institutional funding did not cover this and I did not manage to secure additional funding
+reason_nonattend_programme,Why did you not participate? The programme was not within my scope of research
+reason_nonattend_distance,Why did you not participate? The location was too far
+reason_nonattend_location,Why did you not participate? The location was not attractive enough
+reason_nonattend_visa,Why did you not participate? Visa related issues
+reason_nonattend_caring,Why did you not participate? Caring duties
+reason_nonattend_eventsize,Why did you not participate? I did not feel comfortable being at such a large international scientific event
+reason_nonattend_rejection,Why did you not participate? My abstract got rejected for the type of presentation that I wanted to give
+reason_nonattend_other,Why did you not participate? Other
+expertise_rating,I am an expert in my field 
+understanding_rating,I fully understand the work presented in the talks that I attended 
+english_comfort_rating,I feel comfortable speaking in English 
+discrimination,Did you experience discrimination and/or harassment (of any sort) at the congress? 
+report_discrimination,Did you report the case to the Awareness team? 
+discrimination_witness,Did you witness someone else experience discrimination and/or harassment at the congress? 
+report_discrimination_witness,Did you report the case to the Awareness Team? 
+feeling_heard_rating,"I felt heard during the conversations I had, both during Q&A sessions and social activities "
+comfort_being_yourself_rating,I felt comfortable being myself 
+sense_of_belonging_rating,Attending the Behaviour 2023 congress helped me feel like I belong in my research field 
+ask_questions,Did you ask one or more questions during Q&A sessions? 
+reason_question_interest,"At this congress and in general, what is/are your main motivation(s) to ask a question? (select all that apply)  Interest in the topic"
+reason_question_voiceheard,"At this congress and in general, what is/are your main motivation(s) to ask a question? (select all that apply) Making my voice heard"
+reason_question_appreciate,"At this congress and in general, what is/are your main motivation(s) to ask a question? (select all that apply)  Appraising the speaker's work"
+reason_question_understand,"At this congress and in general, what is/are your main motivation(s) to ask a question? (select all that apply)  Deeper understanding"
+reason_question_showunderstanding,"At this congress and in general, what is/are your main motivation(s) to ask a question? (select all that apply)  Showing the audience and speaker my understanding of the topic"
+reason_question_relevance,"At this congress and in general, what is/are your main motivation(s) to ask a question? (select all that apply) Relevance for my own research"
+reason_question_other,"At this congress and in general, what is/are your main motivation(s) to ask a question? (select all that apply) Other"
+reason_noquestion_clever,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply)  Not feeling clever enough"
+reason_noquestion_misunderstand,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply)  Afraid I misunderstood the content of the presentation"
+reason_noquestion_intimidated_speaker,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) I felt intimidated by the speaker"
+reason_noquestion_intimidated_audience,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) I felt intimidated by the audience"
+reason_noquestion_intimidated_setting,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) I felt intimidated by the setting (eg. size of the room)"
+reason_noquestion_intimidated_chair,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) I felt intimidated by the session chair"
+reason_noquestion_relevance,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) I did not think my question was relevant/important"
+reason_noquestion_phrasing,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) Afraid I would not not be able to phrase/articulate my question well"
+reason_noquestion_notchosen,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) I did raise my hand but was not chosen to ask a question"
+reason_noquestion_notime,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) There was no time left to ask my question"
+reason_noquestion_introvert,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) I am too much of a introvert"
+reason_noquestion_private,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply)  I would rather ask my question after the session, 1-1 with the speaker"
+reason_noquestion_confidence,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) I did not have the confidence"
+reason_noquestion_other_binary,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) Other"
+reason_noquestion_other,"What factors, if any, contributed to your hesitation in asking a question during the Q&A sessions? (select all that apply) Other free tekst"
+comfort_asking_rating,I feel comfortable asking questions during Q&A sessions 
+more_comfort_asking_owngender_speaker_rating,I feel more comfortable asking questions to a speaker who is of my own gender 
+more_comfort_asking_owngender_audience_rating,ÊI feel more comfortable asking question when my own gender is represented in the audience 
+more_comfort_asking_smallaudience_rating,I feel more comfortable asking questions when the audience is smaller 
+more_comfort_asking_owngender_host_rating,I feel more comfortable asking questions when the session host of my own gender 
+more_comfort_asking_know_speaker_rating,I feel more comfortable asking questions when I know the speaker 
+attendance_symposium,"Did you attend Symposium AL- Equity, Diversity and Inclusion in Behaviour, Ecology and Evolution? "
+reason_symposium_learn,What was your motivation to join the symposium? (select all that apply) To learn more about EDI related issues in our field
+reason_symposium_own_experience,What was your motivation to join the symposium? (select all that apply) To talk about EDI related issues I am currently experiencing
+reason_symposium_other_experience,What was your motivation to join the symposium? (select all that apply) To talk about EDI related issues that I know others are experiencing
+reason_symposium_improve,What was your motivation to join the symposium? (select all that apply) To improve the way I do research
+reason_symposium_other,What was your motivation to join the symposium? (select all that apply) Other
+symposium_change,Do you think attending the symposium will change the way you do research in one way or the other? 
+attendance_workshop,"Did you attend one of the diversity related workshops on Saturday, August 19th? "
+reason_workshop_learn,What was your motivation to join the workshop(s)? (select all that apply) To learn more about the EDI realated issues in our field
+reason_workshop_own_experience,What was your motivation to join the workshop(s)? (select all that apply) To learn more about EDI related issues I am experiencing
+reason_workshop_other_experience,What was your motivation to join the workshop(s)? (select all that apply) To learn more about EDI related issues that I know others are experiencing
+reason_workshop_improve,What was your motivation to join the workshop(s)? (select all that apply) To improve the way I do research
+reason_workshop_other,What was your motivation to join the workshop(s)? (select all that apply) Other
+workshop_change,Do you think attending the workshop(s) will change the way you do research one way or the other? 
+feedback_workshop,
+assess_diversity_congress_rating,I think the Congress attendees represented the diversity of researchers in our field 
+assess_edi_issues_rating,"Our research field experiences equity, diversity and inclusion related issues (eg. racism, homophobia, harrassment, bullying etc) "
+assess_gender_qa_rating,I think the questions asked after the talks were equally divided across genders 
+childcare_used,Did you use the childcare service provided by the Congress? 
+childcare_attend_without,"Would you have attended the Congress if there was no childcare service? Yes, but I would not have been able to attend as much / Yes, I would have found another solution"
+childcare_attend_without_other,Would you have attended the Congress if there was no childcare service? Other
+response_childcare_attend_more,"Does a lack of childcare prevent you from attending congresses in general? (select all that apply) Yes, I would be able to attend more if (free) childcare was a standard"
+response_childcare_attend_moreimportant,"Does a lack of childcare prevent you from attending congresses in general? (select all that apply) Yes, I would be able to attend more important congresses for my academic progression (eg. international ones, niche meetings, large congresses) if (free) childcare was a standard"
+response_childcare_attend_regardless,"Does a lack of childcare prevent you from attending congresses in general? (select all that apply) No, I will always find a way to ensure I can attend the congresses I want to go to"
+response_childcare_other,Does a lack of childcare prevent you from attending congresses in general? (select all that apply) Other
+disability,Do you have a disability? 
+disability_accommodate,Did you think we were able to accommodate to your disability? 
+career_3cat,Career stage - 2 levels
+career_2cat,Career stage - 3 levels

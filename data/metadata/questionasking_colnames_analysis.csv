@@ -1,0 +1,51 @@
+names(data_analysis),explanation
+session_id,unique sample ID per question per observer
+talk_nr,talk number within session
+question_nr,question number within talk Q&A
+day_nr,day number (Monday - Saturday)
+time,morning or afternoon session
+lecture_hall,lecture hall
+room_size,size of room (small-medium-large)
+symp_general,symposium or general session
+treatment,treatment session
+condition,condition if treatment session
+treatment_success,was treatment successful
+audience_total,total audience number
+audience_total_sd,standard deviation of total audience counts from multiple observers
+audience_men,men in audience
+audience_men_sd,standard deviation of men in audience counts from multiple observers
+audience_women,calculated women in audience
+audience_men_prop,proportion of men in audience
+audience_women_prop,proportion of women in audience
+duration_qa,duration Q&A
+overtime,did the speaker talk for longer than their talk slot
+host_1_gender,gender of host 1
+host_1_career_short,career stage host 1
+host_1_age,age category host 1
+speaker_career_short,career stage speaker
+speaker_age,age category speaker
+speaker_gender,gender speaker
+alternating_hosts,were there multiple hosts and did they alternate roles
+hands_total,total number of people raising hands
+hands_men,total number of men raising hands
+hands_women,calculated number of women raising hands
+questioner_gender,gender of questioner
+gender_questioner_male,was the questioner male
+questioner_age,age of questioner
+compliment,did the questioner give a compliment / words of appraisal
+question_type_e,"was the question of type e (critical, counter-argument)"
+jumper,did the questioner ask without being allocated to do so
+followup,was this a follow up question from the same person
+repeat,did this person ask another question in this Q&A (not consequetively)
+host_asks,did the host ask this question
+allocator_question,who allocated the question
+no_observers,how many observers were in this session
+double_sampled,was this a double-sampled session
+uncertainty_count_audience,was there uncertainty in the audience counts
+uncertainty_count_hands,was there uncertainty in the number of hands counted
+hands_prop_men,what was the proportion of people raising their hands who were men
+hands_prop_women,what was the proportion of people raising their hands who were women
+host_1_student,career stage host simplified (student/not student)
+speaker_student,career stage speaker simplified (student/not student)
+gender_questioner_female,was the questioner female
+talk_id,unique talk ID (session ID + talk number)

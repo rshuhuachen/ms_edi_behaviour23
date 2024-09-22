@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_estimate,intercept_estimate_prop,intercept_pval,intercept_ci_lower,intercept_ci_higher,n_factors
+QA_plenary_justIC,75.515,60,NA,NA,-1.536,0.177,0,-2.418,-0.927,0

@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,n_factors,est_FIRST_questioner_genderF,est_probabitily_FIRST_questioner_genderF,lowerCI_FIRST_questioner_genderF,higherCI_FIRST_questioner_genderF,pval_FIRST_questioner_genderF,zval_FIRST_questioner_genderF,est_FIRST_questioner_genderM,est_probabitily_FIRST_questioner_genderM,lowerCI_FIRST_questioner_genderM,higherCI_FIRST_questioner_genderM,pval_FIRST_questioner_genderM,zval_FIRST_questioner_genderM
+QA_unmani_asking,288.129,212,0.012,6.341,2,-1.037,0.262,-1.414,-0.659,0,-5.384,-0.327,0.419,-0.734,0.08,0.116,-1.574

@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_estimate,intercept_estimate_prop,intercept_pval,intercept_ci_lower,intercept_ci_higher,n_factors
+QA_general_junior,312.27,229,NA,NA,-0.676,0.337,0,-0.942,-0.413,0

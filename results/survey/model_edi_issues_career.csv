@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_career_3catMid,lowerCI_career_3catMid,higherCI_career_3catMid,tval_career_3catMid,pval_career_3catMid,est_career_3catLate,lowerCI_career_3catLate,higherCI_career_3catLate,tval_career_3catLate,pval_career_3catLate
+edi_issues_career,1372.754,381,0.158,-3.436,-2.003,-1.333,-0.178,0.854,1.987,2,0.325,-0.067,0.719,1.621,0.106,-0.257,-0.842,0.327,-0.863,0.389

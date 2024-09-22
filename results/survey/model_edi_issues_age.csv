@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_age35-50,lowerCI_age35-50,higherCI_age35-50,se_age35-50,tval_age35-50,pval_age35-50,est_age> 50,lowerCI_age> 50,higherCI_age> 50,se_age> 50,tval_age> 50,pval_age> 50
+edi_issues_age,1373.432,381,0.283,2.521,-3.577,-2.147,-1.477,-0.328,0.698,1.827,2,-0.01,-0.406,0.386,0.202,-0.05,0.96,-0.518,-1.168,0.132,0.331,-1.567,0.118

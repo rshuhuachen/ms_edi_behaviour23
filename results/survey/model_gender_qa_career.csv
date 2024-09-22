@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_career_3catMid,lowerCI_career_3catMid,higherCI_career_3catMid,tval_career_3catMid,pval_career_3catMid,est_career_3catLate,lowerCI_career_3catLate,higherCI_career_3catLate,tval_career_3catLate,pval_career_3catLate
+gender_qa_career,1390.165,384,0.366,-3.149,-2.343,-1.436,-0.127,0.616,1.827,2,-0.148,-0.541,0.244,-0.739,0.46,-0.419,-0.976,0.133,-1.484,0.139

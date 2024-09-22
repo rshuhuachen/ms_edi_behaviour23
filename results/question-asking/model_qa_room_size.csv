@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_estimate,intercept_estimate_prop,intercept_pval,intercept_ci_lower,intercept_ci_higher,n_factors,est_room_sizeSmall,lowerCI_room_sizeSmall,higherCI_room_sizeSmall,pval_room_sizeSmall,zval_room_sizeSmall,est_room_sizeMedium,lowerCI_room_sizeMedium,higherCI_room_sizeMedium,pval_room_sizeMedium,zval_room_sizeMedium
+qa_room_size,608.974,349,0.488,1.434,-0.552,0.365,0.001,-0.89,-0.214,2,-0.151,-0.605,0.302,0.514,-0.653,0.168,-0.357,0.693,0.531,0.626

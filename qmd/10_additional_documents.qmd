@@ -1,0 +1,22 @@
+---
+title: "Additional documents"
+author: "Rebecca Chen"
+---
+
+On this page, you can find several additional documents that are not part of the Supplementary Information nevertheless for reproducibility and transparency reasons.
+
+## [Code of Conduct](https://github.com/rshuhuachen/ms_edi_behaviour2023/blob/main/data/extra_docs/Code%20of%20Conduct%20Behaviour%202023.pdf)
+
+All registrants had to agree to adhere to the Code of Conduct.
+
+## [Protocol question asking](https://github.com/rshuhuachen/ms_edi_behaviour2023/blob/main/data/extra_docs/Protocol_Question_Asking_Study.pdf)
+
+The protocol used to collect data by observers on question asking.
+
+## [Instructions to session hosts](https://github.com/rshuhuachen/ms_edi_behaviour2023/blob/main/data/extra_docs/Instructions_session_host.pdf)
+
+The (general) instructions given to session hosts assigned to manipulated sessions.
+
+## [Full post-congress survey](https://github.com/rshuhuachen/ms_edi_behaviour2023/blob/main/data/extra_docs/Behaviour_2023_Post_Congress_Survey.pdf)
+
+Full post-congress survey with summary statistics, including all questions and answers, including those not elaborated on in the manuscript

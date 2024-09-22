@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,n_factors,est_conditionF,est_probabitily_conditionF,lowerCI_conditionF,higherCI_conditionF,pval_conditionF,zval_conditionF,est_conditionM,est_probabitily_conditionM,lowerCI_conditionM,higherCI_conditionM,pval_conditionM,zval_conditionM
+QA_mani_hands,330.649,204,0.251,1.32,2,-0.919,0.285,-1.319,-0.52,0,-4.51,-0.617,0.35,-0.96,-0.274,0,-3.523

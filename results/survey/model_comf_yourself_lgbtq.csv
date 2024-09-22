@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_lgbtqYes,lowerCI_lgbtqYes,higherCI_lgbtqYes,se_lgbtqYes,tval_lgbtqYes,pval_lgbtqYes
+comf_yourself_lgbtq,949.434,361,0.069,3.3,-4.88,-3.655,-3.166,-2.422,-1.342,-0.027,1,-0.478,-0.993,0.037,0.262,-1.826,0.069

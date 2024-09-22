@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_lgbtqYes,lowerCI_lgbtqYes,higherCI_lgbtqYes,se_lgbtqYes,tval_lgbtqYes,pval_lgbtqYes
+feeling_heard_lgbtq,1049.062,360,0.059,3.567,-3.658,-3.31,-2.935,-1.968,-0.946,0.353,1,-0.487,-0.992,0.018,0.257,-1.895,0.059

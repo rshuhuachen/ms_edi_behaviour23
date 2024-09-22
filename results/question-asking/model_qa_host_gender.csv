@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_estimate,intercept_estimate_prop,intercept_pval,intercept_ci_lower,intercept_ci_higher,n_factors,est_host_1_genderF,lowerCI_host_1_genderF,higherCI_host_1_genderF,pval_host_1_genderF,zval_host_1_genderF
+qa_host_gender,546.441,316,0.217,1.522,-0.82,0.306,0,-1.202,-0.439,1,0.296,-0.183,0.775,0.225,1.213

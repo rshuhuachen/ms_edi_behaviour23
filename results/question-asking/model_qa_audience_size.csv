@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_estimate,intercept_estimate_prop,intercept_pval,intercept_ci_lower,intercept_ci_higher,n_factors,est_audience_total,lowerCI_audience_total,higherCI_audience_total,pval_audience_total,zval_audience_total
+qa_audience_size,608.351,349,0.811,0.057,-0.525,0.372,0.05,-1.051,0.001,1,-0.001,-0.009,0.007,0.811,-0.239

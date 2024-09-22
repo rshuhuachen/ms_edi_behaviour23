@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_estimate,intercept_estimate_prop,intercept_pval,intercept_ci_lower,intercept_ci_higher,n_factors,est_questioner_age2,lowerCI_questioner_age2,higherCI_questioner_age2,pval_questioner_age2,zval_questioner_age2,est_questioner_age3,lowerCI_questioner_age3,higherCI_questioner_age3,pval_questioner_age3,zval_questioner_age3
+m_critical_q_age,197.072,805,0.006,10.212,-10.888,0,0,-10.893,-10.883,2,2.188,2.183,2.193,0,826.121,3.068,3.063,3.073,0,1158.491

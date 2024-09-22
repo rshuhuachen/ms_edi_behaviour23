@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_genderFemale,lowerCI_genderFemale,higherCI_genderFemale,se_genderFemale,tval_genderFemale,pval_genderFemale,est_genderNon-binary,lowerCI_genderNon-binary,higherCI_genderNon-binary,se_genderNon-binary,tval_genderNon-binary,pval_genderNon-binary
+gender_qa_gender,1345.544,373,0.014,8.58,-3.343,-2.565,-1.651,-0.357,0.404,1.655,2,-0.44,-0.836,-0.043,0.202,-2.181,0.03,-1.516,-2.761,-0.271,0.633,-2.394,0.017

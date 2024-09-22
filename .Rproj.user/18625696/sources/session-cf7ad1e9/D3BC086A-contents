@@ -1,0 +1,15 @@
+
+pacman::p_load(dplyr, readxl)
+
+qual <- read_excel("../EDI-behaviour2023/data/clean/survey/qualitative_categories.xlsx")
+qual <- subset(qual, Done == 1)
+
+# filter 
+
+nrow(subset(qual, General == 1)) / nrow(qual)*100
+nrow(subset(qual, `CoC/AT` == 1)) / nrow(qual)*100
+nrow(subset(qual, Childcare == 1)) / nrow(qual)*100
+nrow(subset(qual, `Plenary diversity` == 1)) / nrow(qual)*100
+nrow(subset(qual, `Grant / low cost` == 1)) / nrow(qual)*100
+nrow(subset(qual, Pronoun == 1)) / nrow(qual)*100
+nrow(subset(qual, `WS/Symp` == 1)) / nrow(qual)*100

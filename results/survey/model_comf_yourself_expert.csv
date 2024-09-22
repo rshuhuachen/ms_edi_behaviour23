@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_expertise_rating,lowerCI_expertise_rating,higherCI_expertise_rating,se_expertise_rating,tval_expertise_rating,pval_expertise_rating
+comf_yourself_expert,1001.373,385,0,17.767,-3.436,-2.399,-1.942,-1.228,-0.061,1.268,1,0.248,0.131,0.365,0.059,4.169,0

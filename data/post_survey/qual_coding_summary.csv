@@ -1,0 +1,31 @@
+﻿valency,what,n
+Positive,Organisation,85
+Positive,Personal benefit ,50
+Positive,EDI aspects,48
+Positive,Food,26
+Positive,Undesirable interactions,0
+Positive,Social aspects,38
+Positive,COVID,0
+Positive,Session management (chairs),0
+Positive,Academic aspects,31
+Positive,Sustainability,10
+Negative,Organisation,59
+Negative,Personal benefit ,0
+Negative,EDI aspects,57
+Negative,Food,41
+Negative,Undesirable interactions,12
+Negative,Social aspects,0
+Negative,COVID,11
+Negative,Session management (chairs),7
+Negative,Academic aspects,5
+Negative,Sustainability,4
+Suggestions,Organisation,38
+Suggestions,Personal benefit ,0
+Suggestions,Food,18
+Suggestions,EDI aspects,14
+Suggestions,Undesirable interactions,0
+Suggestions,COVID,9
+Suggestions,Sustainability,7
+Suggestions,Session management (chairs),4
+Suggestions,Social aspects,3
+Suggestions,Academic aspects,1

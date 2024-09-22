@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_estimate,intercept_estimate_prop,intercept_pval,intercept_ci_lower,intercept_ci_higher,n_factors,est_audience_women_prop,lowerCI_audience_women_prop,higherCI_audience_women_prop,pval_audience_women_prop,zval_audience_women_prop
+qa_audience_gender,606.38,349,0.154,2.028,0.523,0.628,0.499,-0.993,2.039,1,-1.742,-4.112,0.627,0.15,-1.441

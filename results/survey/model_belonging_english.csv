@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_english_comfort_rating,lowerCI_english_comfort_rating,higherCI_english_comfort_rating,se_english_comfort_rating,tval_english_comfort_rating,pval_english_comfort_rating
+belonging_english,1151.747,386,0,19.426,-1.316,-0.759,0.063,1.27,2.144,3.105,1,0.433,0.241,0.626,0.098,4.421,0

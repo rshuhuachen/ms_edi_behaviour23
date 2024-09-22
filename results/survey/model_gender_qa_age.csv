@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_age35-50,lowerCI_age35-50,higherCI_age35-50,se_age35-50,tval_age35-50,pval_age35-50,est_age> 50,lowerCI_age> 50,higherCI_age> 50,se_age> 50,tval_age> 50,pval_age> 50
+gender_qa_age,1387.829,384,0.173,3.507,-3.16,-2.355,-1.448,-0.139,0.607,1.82,2,-0.316,-0.71,0.079,0.201,-1.571,0.117,-0.419,-1.037,0.198,0.314,-1.336,0.182

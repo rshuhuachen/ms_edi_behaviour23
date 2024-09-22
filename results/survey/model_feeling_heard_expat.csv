@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_expatExpat,lowerCI_expatExpat,higherCI_expatExpat,se_expatExpat,tval_expatExpat,pval_expatExpat
+feeling_heard_expat,1077.053,371,0.197,1.661,-3.381,-3.06,-2.706,-1.775,-0.806,0.561,1,0.245,-0.129,0.619,0.19,1.287,0.199

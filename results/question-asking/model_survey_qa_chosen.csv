@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_estimate,intercept_estimate_prop,intercept_pval,intercept_ci_lower,intercept_ci_higher,n_factors,est_genderFemale,lowerCI_genderFemale,higherCI_genderFemale,pval_genderFemale,zval_genderFemale,est_genderNon-binary,lowerCI_genderNon-binary,higherCI_genderNon-binary,pval_genderNon-binary,zval_genderNon-binary
+survey_qa_chosen,320.673,375,0.475,1.491,-1.946,0.125,0,-2.506,-1.386,2,0.26,-0.394,0.913,0.437,0.778,1.03,-0.703,2.762,0.244,1.165

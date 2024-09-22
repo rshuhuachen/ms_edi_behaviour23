@@ -1,0 +1,22 @@
+---
+title: "Introduction"
+bibliography: qmd/references.bib
+---
+
+# This page
+
+On this webpage, you will find the results from the manuscript "Equity, diversity and inclusivity at the Behaviour 2023 Congress". This page will follow the same structure as the Results section of the manuscript, with additional details from the methods to display the important code snippets to e.g. define the statistical models, create the plots, etc. Additional scripts that were used for data curation, clean-up, additional exploration, etc. can be found in the [github repository](https://github.com/rshuhuachen/ms_edi_behaviour2023).
+
+![Organizing Team Behaviour 2023](data/pic.jpg)
+
+# Introduction
+
+We, as part of the Organizing Committee, investigated inequality at scientific conferences regarding multiple aspects of social identity using a case study: the international [Behaviour 2023 congress](http://behaviour2023.com) that took place in Bielefeld, Germany, August 2023. The congress was attended by approximately 800 scientists including 661 presenters who gave talks in 98 different parallel sessions.
+
+The Organizing Committee of the congress took multiple approaches in an attempt to boost inclusivity at the congress (see Methods for full details). To protect all attendees and ensure everyone understands expected and unacceptable behaviour during the congress, all congress attendees were obliged to agree to a Code of Conduct (CoC) when registering (Appendix A). To aid people with auditory, visual, mobility and / or dietary needs, we provided information and offered help on the website and in the congress registration form, which also helped us prepare helpful logistics and tools during the congress, such as quiet rooms. As underrepresented researchers from the Global South are more financially limited to attend international congresses, we offered a limited number of full travel grants to X researchers based in the Global South. During the congress, attendees were able to express concerns, report discrimination and inform the Organizing Committee of any harassment to an Awareness Team. Free childcare was offered and various parent-children rooms were reserved for attendees and partners. Further, we convened a symposium on "Equality, diversity and equity in behaviour, ecology and evolution" and organized EDI-related workshops given by external moderators to boost discussion and spread awareness. To facilitate the use of the correct pronouns, attendees could opt to print their pronouns on their nametags. Lastly, the Committee ensured that there was gender and ethnic diversity in (invited) plenary speakers, ensuring all continents (North, South and Central America, Europe, Africa, Oceania, and Asia) were represented and that at least half of the plenary speakers were female. XX something about other initiatives that could have been taken but we didn't manage to, to show we're not just trying to say we did a great job XX.
+
+# This study
+
+To assess diversity and inclusivity at the congress, we collected various types of data at several time points. First, we asked researchers who submitted an abstract to voluntarily provide us with information on their social identity in the pre-congress survey (N = 729 responses). A few months later, we repeated this pre-congress survey during congress registration (N = 727 responses). During the congress, we collected data on question asking behaviour to address gender disparity in question asking behaviour (N = 1278 questions). Moreover, we experimentally assessed whether session hosts choosing the first questioner to be a woman encourages other women to ask their questions (N = 209 manipulated talks with 784 questions). After the congress finished, we circulated a post-congress survey (N = 391 responses) which included questions on people's congress experience, motivations to ask questions, reasons why they did not ask a question, perceptions of EDI-related in academia, as well as qualitative feedback on the inclusivity initiatives taken at the congress.
+
+![Logo Behaviour 2023](data/logo_behaviour_whitebackground.png)

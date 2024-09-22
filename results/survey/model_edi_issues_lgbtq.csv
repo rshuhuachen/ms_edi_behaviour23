@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_lgbtqYes,lowerCI_lgbtqYes,higherCI_lgbtqYes,se_lgbtqYes,tval_lgbtqYes,pval_lgbtqYes
+edi_issues_lgbtq,1279.769,357,0.001,10.4,-3.45,-1.991,-1.296,-0.143,0.886,2.009,1,0.799,0.309,1.289,0.249,3.208,0.001

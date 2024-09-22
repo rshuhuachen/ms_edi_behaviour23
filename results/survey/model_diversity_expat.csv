@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_12,intercept_23,intercept_34,intercept_45,intercept_56,intercept_67,n_factors,est_expatExpat,lowerCI_expatExpat,higherCI_expatExpat,se_expatExpat,tval_expatExpat,pval_expatExpat
+diversity_expat,1268.707,371,0.252,1.312,-4.213,-2.918,-1.942,-0.906,0.053,1.587,1,-0.212,-0.575,0.152,0.185,-1.145,0.253

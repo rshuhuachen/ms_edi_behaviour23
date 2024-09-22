@@ -1,0 +1,61 @@
+names(all_data_treatment),explanation
+sample_id,unique sample ID per question per observer
+transcriber,identifier transcriber
+observer_session,identifier observer
+day,day of talk 
+session_id,session ID
+host_1_gender,inferred gender of host 1
+host_1_pronoun,pronouns of host 1
+host_1_career,career stage of host 1
+how_host_1_career,how did we confirm the career stage of the host?
+host_1_age,inferred age category of host 1
+host_2_gender,inferred gender of host 2
+host_2_pronoun,pronouns of host 2
+host_2_career,career stage of host 2
+how_host_2_career,how did we confirm the career stage of the host?
+host_2_age,inferred age category of host 2
+host_3_gender,inferred gender of host 3
+host_3_pronoun,pronouns of host 3
+host_3_career,career stage of host 3
+how_host_3_career,how did we confirm the career stage of the host?
+host_3_age,inferred age category of host 3
+talk_nr,talk number
+speaker_career,career stage speaker
+how_speaker_career,how did we confirm the career stage of the speaker?
+speaker_age,inferred age category speaker
+speaker_gender_infer,inferred gender speaker
+speaker_pronoun,pronouns speaker
+how_speaker_pronoun,how did we confirm the pronouns of the speaker?
+audience_total,total audience size
+audience_men,number of men in the audience
+start_qa,start time QA
+end_qa,end time QA
+overtime,did the speaker talk longer than their assigned slot?
+question_nr,question number
+hands_total,total number of people raising their hand
+hands_men,total number of men raising their hand
+questioner_gender,inferred gender of questioner
+questioner_age,inferred age category of questioner
+compliment,did the questioner say any positive words of appraisal?
+question_type_a,was the question of type a 
+question_type_b,was the question of type b
+question_type_c,was the question of type c
+question_type_d,was the question of type d
+question_type_e,was the question of type e
+question_type_f,was the question of type f
+question_type_g,was the question of type g
+questioner_info,was it a follow up question or anythingn else about the questioner?
+alternating_hosts,did the hosts alternate roles if there were multiple?
+uncertainty_gender_host,was there any uncertainty in data collection of host gender
+uncertainty_gender_speaker,was there any uncertainty in data collection of speaker gender
+uncertainty_gender_questioner,was there any uncertainty in data collection of questioner gender
+uncertainty_count_audience,was there any uncertainty in data collection of audience counts
+uncertainty_count_hands,was there any uncertainty in data collection of counts of hands
+allocator_question,who allocated the question (speaker or host)?
+lecture_hall,which lecture hall
+room_size,how large was the room
+audience_women,number of women in the audience (calculated from total and men counts)
+duration_qa,duration of the QA (calculated from end and start time)
+no_q_type,was a question type noted down
+Treatment,was this a treatment session
+Condition,what was the condition if it was a treatment
