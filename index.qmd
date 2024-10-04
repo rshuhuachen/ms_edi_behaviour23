@@ -5,7 +5,7 @@ bibliography: qmd/references.bib
 
 # This page
 
-On this webpage, you will find the results from the manuscript "Equity, diversity and inclusivity at the Behaviour 2023 Congress". This page will follow the same structure as the Results section of the manuscript, with additional details from the methods to display the important code snippets to e.g. define the statistical models, create the plots, etc. Additional scripts that were used for data curation, clean-up, additional exploration, etc. can be found in the [github repository](https://github.com/rshuhuachen/ms_edi_behaviour23).
+On this webpage, you will find the results from the manuscript "How can we make academic conferences more inclusive? Lessons from an international conference on animal behaviour", currently available as a preprint at [EcoEvoRxiv](https://doi.org/10.32942/X20K8H). This page will follow the same structure as the Results section of the manuscript, with additional details from the methods to display the important code snippets to e.g. define the statistical models, create the plots, etc. Additional scripts that were used for data curation, clean-up, additional exploration, etc. can be found in the [github repository](https://github.com/rshuhuachen/ms_edi_behaviour23).
 
 ![Organizing Team Behaviour 2023](data/pic.jpg)
 

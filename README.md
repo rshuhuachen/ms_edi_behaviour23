@@ -1,6 +1,6 @@
 # Equity, diversity and inclusion at Behaviour 2023
 
-This is the public repository for all the data, code and figures presented in the manuscript titled "How can we make conferences more inclusive? Lessons from the International Ethological Congress" by Rebecca Chen *et al.* (in prep)
+This is the public repository for all the data, code and figures presented in the manuscript titled "How can we make academic conferences more inclusive? Lessons from an international conference on animal behaviour" by Rebecca Chen *et al.*, currently available as a preprint at [EcoEvoRxiv](https://doi.org/10.32942/X20K8H).
 
 To get the repository to your local device, you can use the command (after ensuring git is installed):
 `git clone https://github.com/rshuhuachen/ms_edi_behaviour23.git`
