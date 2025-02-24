@@ -387,7 +387,7 @@ ggplot(prop_plot) +
                linewidth=1) +
   geom_hline(yintercept = 0.5, col = "red", linetype = "dotted") +
   
-  labs(y = "Female probability and 95% CI", x = "Gender first questioner") + 
+  labs(y = "Probability for women and 95% CI", x = "Perceived gender first questioner") + 
   facet_grid(data~what, scales="free_x")+
   scale_color_manual(values = col_sig) +
   theme(legend.position = "none",

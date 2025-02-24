@@ -29,11 +29,11 @@ ggplot(out_how) +
   labs(x = "Intercept and 95% CI", y = "Model") + 
   xlim(-2.5, 2.5) +
   scale_color_manual(values = col_sig) +
-  annotate("text", x = -1, y = 3.5, label = "Male bias", size = 6)+
-  annotate("text",label = "Female bias", y = 3.5, x = 1, size = 6)+
-  annotate("segment", x = -0.2, xend = -2.3, y = 3.3,linewidth=1,
+  annotate("text", x = -1.3, y = 3.5, label = "Bias towards men", size = 6)+
+  annotate("text",label = "Bias towards women", y = 3.5, x = 1.3, size = 6)+
+  annotate("segment", x = -0.2, xend = -2.5, y = 3.3,linewidth=1,
            arrow = arrow(length=unit(0.2, "cm")))+
-  annotate("segment", x = 0.2, xend = 2.3, y = 3.3,linewidth=1,
+  annotate("segment", x = 0.2, xend = 2.5, y = 3.3,linewidth=1,
            arrow = arrow(length=unit(0.2, "cm")))+
   theme(legend.position = "none") -> plot_2a
 
@@ -60,7 +60,7 @@ ggplot(m_survey_out_long) +
   labs(x = "Estimate and 95% CI", y = "Gender") + 
   xlim(-2, 1.5) +
   scale_color_manual(values = col_sig) +
-  annotate("text", 2.5, x = -1, label = "Male bias", size = 6)+
+  annotate("text", 2.5, x = -1, label = "Bias towards men", size = 6)+
   annotate("segment", -0.3, xend = -1.8, y = 2.3, linewidth=1,
            arrow = arrow(length=unit(0.2, "cm")))+
  theme(legend.position = "none") -> plot_2b
@@ -101,7 +101,7 @@ actual_model_hands <- function(x) {
 ggplot(data_control, aes(x = audience_women_prop_logit, y = jittered_hands)) +
   stat_function(fun = null_model_hands, geom = "area", fill = "grey90", alpha = 0.5) +
   geom_point(alpha = 0.4, size = 2.5) +
-  labs(x = "Logit(proportion female audience)",
+  labs(x = "Logit(proportion audience perceived as women)",
        y = "Probability of a woman raising their hand") +
   xlim(-1.5, 2.5) +
   scale_y_continuous(breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1),
@@ -112,13 +112,13 @@ ggplot(data_control, aes(x = audience_women_prop_logit, y = jittered_hands)) +
 hypothesis", color = clrs[1], angle = 0, size = 6)+
   # Add the actual data model line
   stat_function(fun = actual_model_hands, color = clrs[9], linewidth=1) +
-  annotate("text", x = -0.6, y = 0.1, label = "emperical
+  annotate("text", x = -0.6, y = 0.1, label = "empirical
 data", color = clrs[9], angle = 0, size = 6) + 
   # Add text annotations for biases
   annotate("text", x = -0.8, y = 0.8, label = "bias towards 
- females",  color = "black", size = 6) +
+ women",  color = "black", size = 6) +
   annotate("text", x = 1.8, y = 0.15, label = "bias towards 
-males",  color = "black", size = 6)+
+men",  color = "black", size = 6)+
   theme(plot.margin=margin(2,1,1,1,"cm")) -> plot_2c
 plot_2c
 
@@ -140,7 +140,7 @@ actual_model_chosen <- function(x) {
 ggplot(data_hands, aes(x = logit_hands_prop_women, y = jittered_gender)) +
   stat_function(fun = null_model_chosen, geom = "area", fill = "grey90", alpha = 0.5) +
   geom_point(alpha = 0.4, size = 2.5) +
-  labs(x = "Logit(proportion female hands)",
+  labs(x = "Logit(proportion hands raised by perceived women)",
        y = "Probability of a woman getting chosen") +
   xlim(-1.5, 2.5) +
   scale_y_continuous(breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1),
@@ -151,13 +151,13 @@ ggplot(data_hands, aes(x = logit_hands_prop_women, y = jittered_gender)) +
 hypothesis",  color = clrs[1], angle = 0, size = 6)+
   # Add the actual data model line
   stat_function(fun = actual_model_chosen, color = clrs[9], linewidth=1) +
-  annotate("text", x = -0.4, y = 0.2, label = "emperical 
+  annotate("text", x = -0.4, y = 0.2, label = "empirical 
 data",  color = clrs[9], angle = 0, size = 6) + 
   # Add text annotations for biases
   annotate("text", x = -0.8, y = 0.75, label = "bias towards 
- females",  color = "black", size = 6) +
+ women",  color = "black", size = 6) +
   annotate("text", x = 1.8, y = 0.15, label = "bias towards 
-males",  color = "black", size = 6) +
+men",  color = "black", size = 6) +
   theme(plot.margin=margin(2,1,1,1,"cm"))-> plot_2d
 plot_2d
 
@@ -367,7 +367,7 @@ ggplot(comfort_qa_reasons_long) +
   labs(x = "Estimate and 95% CI", y="Variable") + 
   scale_color_manual(values = col_sig) +
   scale_y_discrete(labels = scales::label_wrap(20)) +
-  annotate(geom="text", label = "Male bias", y = 6.3, x = -2, size = 6)+
+  annotate(geom="text", label = "Bias towards men", y = 6.3, x = -2, size = 6)+
   annotate(geom="segment", x = -0.5, xend = -4, y = 6, linewidth=1,arrow = arrow(length=unit(0.2, "cm")))+
   theme(legend.position = "none",
         plot.margin=margin(1.5,1,1,1, "cm")) -> plot_4a

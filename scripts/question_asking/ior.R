@@ -317,6 +317,9 @@ col_sig <- clrs[c(10,2)] %>%
 
 ior <- ior %>% mutate(sig = case_when(pval < 0.05 ~ "sig", TRUE ~ "nonsig"))
 
+# exclude age
+ior <- subset(ior, !grepl("age", ior$variable))
+
 ggplot(subset(ior, level == "Session"), aes(x = statistic, y = variable)) + 
   geom_point(size = 6, aes(col = test)) + 
   scale_color_manual(values = c(clrs[3], clrs[7])) +
