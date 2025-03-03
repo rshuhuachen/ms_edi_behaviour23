@@ -15,7 +15,7 @@ The `metadata` folder contains a list of all countries presented by attendees at
 
 The `post_survey` folder contains the anonymised post-congress survey data (minus the qualitative feedback to ensure the data is 100% anonymous) and a summary of our qualitative analysis on the open question responses.
 
-The `pre_survey`folder contains the data collected during abstract submission (not mentioned in the manuscript) and during registration.
+The `pre_survey` folder contains the data collected during abstract submission (not mentioned in the manuscript) and during registration.
 
 The `question_asking` folder contains all data collected during Q&A sessions on question asking behaviour. Data collected during plenary sessions was kept separate (combined_session_talk_question_all_long_plenary.RData for raw data; plenary.RData for processed data after manual correction done in plenary_corrected_manual.xlsx). The long dataframe, containing all observations in long format can be found in combined_session_talk_question_all_long_withtreatment.RData, while the processed data used for analysis can be found in question_asking_data_condensed_for_analysis.RData.
 

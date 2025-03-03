@@ -1,0 +1,3 @@
+## Data
+
+This folder contains all anonymised data used for the manuscript. The data are divided in three main sections: pre congress survey / registration (`pre_survey`), the observational data (`question_asking`) and the post-congress survey (`post-survey`). Additional documents (such as our methods protocol, the full surveys) can be found in `extra_docs`, metadata on the congress can be found in the folder `metadata`. Some additional materials used for the congress, such as the logo's used for the website with a summary of our manuscript can be found in the main folder.
