@@ -250,6 +250,18 @@ summary(glmer(gender_questioner_female ~ 1 + (1|session_id/talk_id), family = "b
 
 The model results seem virtually identical!
 
+## Supplementary: rerun models with only double-observed data.
+
+Not all sessions were observed by multiple observed. To ensure the perception of gender of a single observer did not bias our conclusions, we repeated the model while excluding the sessions without a second observer.
+
+```{r doubleobs, echo=T, message=F, warning=F}
+
+summary(glmer(gender_questioner_female ~ 1 + (1|session_id/talk_id), family = "binomial", offset=boot::logit(audience_women_prop), data = subset(data_control, double_sampled == "double_sampled")))
+
+```
+
+While the results are not as extreme, likely due to reduced power by excluding sessions, they are still significant and indicate that women ask less questions than men.
+
 ## Supplementary: inter-observer reliability
 
 The data used above merge data collected by multiple observers, after we checked whether the reliability between different observers was high enough. Below you will find an example of how we calculated this IOR (inter-observer reliability) and the full script can be found under `scripts/2_question_asking/ior.R`.

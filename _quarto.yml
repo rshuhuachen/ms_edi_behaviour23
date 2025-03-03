@@ -12,7 +12,7 @@ book:
     - index.qmd
     - qmd/1_summary_identities.qmd
     - qmd/2_question_asking_general.qmd
-    - qmd/3_question_asking_per_age.qmd
+#    - qmd/3_question_asking_per_age.qmd
     - qmd/4_question_asking_how.qmd
     - qmd/5_question_asking_why.qmd
     - qmd/6_question_experiment.qmd
@@ -20,6 +20,7 @@ book:
     - qmd/8_perception_issues.qmd
     - qmd/9_other_gender_disparity.qmd
     - qmd/10_additional_documents.qmd
+    - qmd/11_test_career_stage_sensitivity.qmd
   navbar:
     search: true
 
