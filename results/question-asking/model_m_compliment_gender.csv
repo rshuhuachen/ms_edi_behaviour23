@@ -1,0 +1,2 @@
+model_name,AIC,n_obs,lrt_pval,lrt_chisq,intercept_estimate,intercept_estimate_prop,intercept_pval,intercept_ci_lower,intercept_ci_higher,n_factors,est_speaker_genderM,lowerCI_speaker_genderM,higherCI_speaker_genderM,pval_speaker_genderM,zval_speaker_genderM,est_question_nr,lowerCI_question_nr,higherCI_question_nr,pval_question_nr,zval_question_nr,est_NA,lowerCI_NA,higherCI_NA,pval_NA,zval_NA
+m_compliment_gender,1292.96,1016,0.187,1.743,0.637,0.654,0,0.296,0.978,3,-0.205,-0.51,0.1,0.187,-1.32,-0.34,-0.432,-0.248,0,-7.264,NA,NA,NA,NA,NA
